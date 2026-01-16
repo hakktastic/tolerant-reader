@@ -1,0 +1,47 @@
+### GET customer first name with tolerant reader from V1 API ($.data.fistName):
+
+# upstream service v1 returns:
+
+#{
+#  "Status": "200 OK",
+#  "data": {
+#    "age": 25,
+#    "dummyField1": "dummy1",
+#    "dummyField2": "dummy2",
+#    "firstName": "hakk",
+#    "lastName": "tastic"
+#  },
+#  "message": "Api/v1 Response with V1 Response Data",
+#  "timestamp": "2026-01-15T17:36:20.175233"
+#}
+GET http://localhost:8081/api/v1/customers
+
+> {%
+    client.test("Request executed successfully", function () {client.assert(response.status === 200, "Response status is not 200");});
+    client.test("Response has firstName", function () {client.assert(response.body.data == "hakk", "Response has not returned expected firstName");});
+ %}
+
+### GET customer first name with tolerant reader from V1 API ($.data.customerInfo.firstName):
+
+# upstream service v2 returns
+
+#{
+#  "Status": "200 OK",
+#  "data": {
+#    "customerInfo": {
+#      "age": 25,
+#      "firstName": "hakk",
+#      "lastName": "tastic"
+#    },
+#    "dummyField1": "dummy1",
+#    "dummyField2": "dummy2"
+#  },
+#  "message": "Api/v1 Response with V2 Response Data",
+#  "timestamp": "2026-01-15T17:37:26.024978"
+#}
+GET http://localhost:8081/api/v2/customers
+
+> {%
+    client.test("Request executed successfully", function () {client.assert(response.status === 200, "Response status is not 200");});
+    client.test("Response has firstName", function () {client.assert(response.body.data == "hakk", "Response has not returned expected firstName");});
+ %}

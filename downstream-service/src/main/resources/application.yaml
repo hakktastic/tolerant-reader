@@ -1,0 +1,12 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: tolerant-reader-rest-service
+
+logging:
+  level:
+    nl.hakktastic.tolerantreaderrestservice: TRACE
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID:- }){magenta} %clr([%30.30t]){faint} %clr(%-60.60logger{39}){cyan} %clr(:){faint} %m%n"
